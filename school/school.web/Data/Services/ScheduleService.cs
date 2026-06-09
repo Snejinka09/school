@@ -1,18 +1,20 @@
-﻿using school.Db.Models;
+﻿using school.Db;
+using school.Db.Models;
 
 namespace school.web.Data.Services
 {
     public class ScheduleService
     {
-        List<ScheduleModel> schedules = new List<ScheduleModel>
+        private SchoolDbContext _context;
+        public ScheduleService(SchoolDbContext context)
         {
-          new ScheduleModel { Id = 1,Date = new DateTime(2026, 9, 1),LessonNumber = 1,ClassId = 11, },
-          new ScheduleModel { Id = 2,Date = new DateTime(2026, 9, 1),LessonNumber = 2,ClassId = 10, },
-        };
+            _context = context;
+        }
 
-        public List<ScheduleModel> GetSchedules()
+        public List<ScheduleItemViewModel> GetSchedules()
         {
-            return schedules;
+            var list = _context.ScheduleDbSet.ToList();
+            return list.ConvertAll(x => new ScheduleItemViewModel(x));
         }
     }
 }

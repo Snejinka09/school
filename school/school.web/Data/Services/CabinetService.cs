@@ -1,18 +1,21 @@
-﻿using school.Db.Models;
+﻿using school.Db;
+using school.Db.Models;
+using school.web.PageModels;
 
 namespace school.web.Data.Services
 {
     public class CabinetService
     {
-        private List<Cabinet> cabinets = new List<Cabinet>
+       private SchoolDbContext _context;
+       public CabinetService(SchoolDbContext schoolDbContext)
         {
-            new Cabinet{ Id = 1, Number = 21},
-            new Cabinet{ Id = 2, Number = 22},
-        };
+            _context = schoolDbContext;
+        }
 
-        public List<Cabinet> GetCabinets()
+        public List<CabinetItemViewModel> GetCabinets()
         {
-            return cabinets;
+            var list = _context.CabinetsDbSet.ToList();
+            return list.ConvertAll(x => new CabinetItemViewModel(x));
         }
     }
 }

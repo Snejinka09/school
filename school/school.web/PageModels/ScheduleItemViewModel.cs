@@ -29,7 +29,7 @@ namespace school.Db.Models
 
 
         public virtual CabinetItemViewModel Cabinet { get; set; }
-        public virtual Teacher Teacher { get; set; }
+        public virtual TeacherModel Teacher { get; set; }
         public virtual ClassModel Class { get; set; }
     }
 }

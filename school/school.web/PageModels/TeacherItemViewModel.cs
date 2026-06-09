@@ -4,10 +4,10 @@ namespace school.web.PageModels
 {
     public class TeacherItemViewModel
     {
-        private Teacher _item;
-        public Teacher Item => _item;
+        private TeacherModel _item;
+        public TeacherModel Item => _item;
 
-        public TeacherItemViewModel(Teacher item)
+        public TeacherItemViewModel(TeacherModel item)
         {
             _item = item;
         }

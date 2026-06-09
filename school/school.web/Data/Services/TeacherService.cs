@@ -1,17 +1,20 @@
-﻿using school.Db.Models;
+﻿using school.Db;
+using school.Db.Models;
+using school.web.PageModels;
 
 namespace school.web.Data.Services
 {
 	public class TeacherService
 	{
-		public List<Teacher> teachers = new List<Teacher>
+		private SchoolDbContext _context;
+		public TeacherService(SchoolDbContext teacherService)
 		{
-			new Teacher {Id = 1, FirstName = "Snejana", MiddleName = "Denisovna", LastName = "Tarasova", Age = 37},
-			new Teacher {Id = 2, FirstName = "Polina", MiddleName = "Nikiforovna", LastName = "Strokotova", Age= 22}
-		};	
-		public List<Teacher> GetTeachers()
-		{
-			return teachers;
+			_context = teacherService;
 		}
+		public List<TeacherItemViewModel> GetTeachers()
+		{
+            var list = _context.TeacherDbSet.ToList();
+			return list.ConvertAll(x => new TeacherItemViewModel(x));
+        }
 	}
 }

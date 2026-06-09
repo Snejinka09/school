@@ -7,9 +7,9 @@ namespace school.web.Components.Pages.Schedule
 	public class ScheduleViewModel : ComponentBase
 	{
 		[Inject] ScheduleService ScheduleService { get; set; }
-        protected List<school.Db.Models.ScheduleModel> Schedule { get; set; } = new();
+        public List<ScheduleItemViewModel> Schedule { get; set; } = new();
 
-		protected override Task OnAfterRenderAsync(bool firstRender)
+        protected override Task OnAfterRenderAsync(bool firstRender)
 		{
 			if (firstRender)
 			{

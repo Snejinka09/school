@@ -1,17 +1,22 @@
-﻿using school.Db.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using school.Db;
+using school.Db.Models;
 
 namespace school.web.Data.Services
 {
 	public class ManagmentService
 	{
-		List<Managment> managments = new List<Managment>
+		private SchoolDbContext _context;
+		public ManagmentService(SchoolDbContext schoolDbContext)
+        {
+            _context = schoolDbContext;
+        }
+
+        public List<ManagmentItemViewModel> GetManagments()
 		{
-			new Managment {Id = 1, Position = "Director", FirstName = "Alla", MiddleName = "Borisovna", Age = 45, LastName = "Ivanova" },
-			new Managment {Id = 2,Position = "Zavuch", FirstName = "Anna", MiddleName = "Georgievna", Age = 39, LastName = "Bobrova" },
-		};
-		public List<Managment> GetManagments()
-		{
-			return managments;
-		}
+            var list = _context.ManagmentsDbSet.ToList();
+            return list.ConvertAll(x => new ManagmentItemViewModel(x));
+
+        }
 	}
 }

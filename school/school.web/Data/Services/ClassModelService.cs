@@ -1,19 +1,22 @@
-﻿using school.Db.Models;
+﻿using school.Db;
+using school.Db.Models;
+using school.web.PageModels;
 
 namespace school.web.Data.Services
 {
 	public class ClassModelService
 	{
-		public List<ClassModel> classModels = new List<ClassModel>
+		private SchoolDbContext _context;
+		public ClassModelService(SchoolDbContext schoolDbContext)
 		{
-			new ClassModel { Id = 1, Number = 1 },
-			new ClassModel { Id = 2, Number = 2 },
-		};
-
-		public List<ClassModel> GetClassModels()
-		{
-			return classModels;
+			_context = schoolDbContext;
 		}
+
+        public List<ClassItemViewModel> GetClassModels()
+		{
+            var list = _context.ClassesModelDbSet.ToList();
+            return list.ConvertAll(x => new ClassItemViewModel(x));
+        }
 		
 	}
 }

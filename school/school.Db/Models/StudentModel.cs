@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace school.Db.Models
 {
+    [Table("Students")] //параметры передаем таблицу "Students"
 
-    public class Student
+    public class StudentModel
     {
+        [Key]
+
         public int Id { get; set; }
 
         public string FirstName { get; set; }
@@ -20,17 +25,5 @@ namespace school.Db.Models
         public int Age { get; set; }
 
         public int ClassId { get; set; }
-
-
-		public Student(int id, string firstName, string middleName, string lastName, int age, int classId)
-		{
-        Id = id;
-        FirstName = firstName;
-		MiddleName = middleName;
-		LastName = lastName;
-		Age = age;
-		ClassId = classId;
-		}
 	}
- 
 }

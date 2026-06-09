@@ -2,10 +2,10 @@
 
 public class StudentItemViewModel
 {
-    private Student _item;
-    public Student Item => _item;
+    private StudentModel _item;
+    public StudentModel Item => _item;
 
-    public StudentItemViewModel(Student item)
+    public StudentItemViewModel(StudentModel item)
     {
         _item = item;
     }

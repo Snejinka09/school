@@ -1,13 +1,15 @@
 ﻿using Microsoft.AspNetCore.Components;
 using school.Db.Models;
 using school.web.Data.Services;
+using school.web.PageModels;
 
-namespace school.web.Components.Pages.Student
+namespace school.web.Pages.Student
 {
 		public class StudentPageViewModel : ComponentBase
         {
-        [Inject] StudentService StudentService { get; set; }
-		protected List<school.Db.Models.Student> Students { get; set; } = new();
+        [Inject] 
+        public StudentService StudentService { get; set; }
+		public List<StudentItemViewModel> Students { get; set; } = new();
 
         protected override Task OnInitializedAsync()
         {

@@ -5,7 +5,7 @@ namespace school.web.Components.Pages.Cabinet
 {
     public class CabinetPageViewModel : ComponentBase
     {
-        [Inject] CabinetService CabinetService { get; set; }
+        [Inject] CabinetService CabinetService { get; set; } // подключение сервисов и их настройки
 
 		protected override Task OnAfterRenderAsync(bool firstRender)
 		{

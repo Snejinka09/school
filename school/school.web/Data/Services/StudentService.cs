@@ -1,4 +1,5 @@
-﻿using school.Db.Models;
+﻿using school.Db;
+using school.Db.Models;
 
 namespace school.web.Data.Services
 {
@@ -6,17 +7,23 @@ namespace school.web.Data.Services
 
 	public class StudentService
     {
-		List<Student> students = new List<Student>
-		{
-		new Student(2, "Maria", "Sergeevna", "Petrova", 18, 11),
-		new Student(3, "Dmitry", "Alexandrovich", "Sidorov", 20, 12),
-		new Student(4, "Elena", "Viktorovna", "Kozlova", 17, 10),
-		new Student(5, "Nikita", "Igorevich", "Smirnov", 19, 11),
-		};
+		private SchoolDbContext _context; //переменная, чтобы приянть schoolDbContext
 
-        public List<Student> GetStudents()
+        public StudentService(SchoolDbContext schoolDbContext) // конструктор для подключения БД
+		{
+			_context = schoolDbContext;
+		}
+		public List<StudentItemViewModel> GetStudents()
+		{
+			var list = _context.StudentDbSet.ToList();
+			return list.ConvertAll(x => ConvertItem(x));
+		}
+
+        private StudentItemViewModel ConvertItem(StudentModel x)
         {
-            return students;
+			var item = new StudentItemViewModel(x);
+			return item;
+
         }
     }
 
