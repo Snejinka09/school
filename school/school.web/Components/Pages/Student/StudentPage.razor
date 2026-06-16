@@ -3,7 +3,7 @@
 @using school.web.Pages.Student
 @rendermode InteractiveServer
 <h3>Ученики</h3>
-<i class=" btn btn-danger bi-search"></i>
+
 
 <table class="table table-striped">
     <thead>
@@ -14,6 +14,7 @@
             <th>Отчество</th>
             <th>Возраст</th>
             <th>Класс</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -26,11 +27,21 @@
                 <td>@student.MiddleName</td>
                 <td>@student.Age</td>
                 <td>@student.ClassId</td>
+                <td><i class="btn btn-success bi bi-pencil" @onclick="@(() => SelectStudent(student))"></i>
+                </td>
             </tr>
         }
     </tbody>
 </table>
-
+@if (SelectedStudent != null)
+{
+    <input @bind="SelectedStudent.FirstName"/>
+    <input @bind="SelectedStudent.LastName" />
+    <input @bind="SelectedStudent.MiddleName" />
+    <input @bind="SelectedStudent.Age" />
+    <input @bind="SelectedStudent.ClassId" />
+    <button @onclick="Save">Сохранить</button>
+}
 @code {
 
 }

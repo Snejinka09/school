@@ -19,11 +19,24 @@ namespace school.web.Data.Services
 			return list.ConvertAll(x => ConvertItem(x));
 		}
 
+		public void Update(StudentItemViewModel student)
+		{
+			//var item = _context.StudentDbSet.FirstOrDefault(x => x.Id == student.Id);
+			//if (item != null)
+			//{
+			//	item.FirstName = student.FirstName;
+			//	item.LastName = student.LastName;
+			//	item.Age = student.Age;
+			//	item.MiddleName = student.MiddleName;
+				var updateItem = _context.UpdateStudent(student.Item);
+			//}
+		}
+       
+
         private StudentItemViewModel ConvertItem(StudentModel x)
         {
 			var item = new StudentItemViewModel(x);
 			return item;
-
         }
     }
 
