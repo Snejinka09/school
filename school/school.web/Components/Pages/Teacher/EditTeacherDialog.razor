@@ -1,0 +1,28 @@
+﻿@using school.web.PageModels.Teachers
+
+
+<MatDialog IsOpen="@(ViewModel?.IsOpenDialog ?? false)" CanBeClosed="true">
+	<EditForm Model="ViewModel.Model" OnValidSubmit="@(() => { Save.InvokeAsync(ViewModel.Model); })"> @* Вызывается метод Submit (какой метод мы в него положили), если валидация пройдена, модно выывать функцию OnInvalidSubmit и метод при неудачной проверке(не забудь закрыть) *@
+	<MatDialogTitle class="diHeader">
+		<h3>Изменение параметров учителя</h3>
+		<button class="btn btn-success" @onclick="@(() => Save.InvokeAsync(ViewModel.Model))">Сохранить</button>
+		<button class="btn btn-secondary" @onclick="@(() => Save.InvokeAsync(null))">Отмена</button>
+	</MatDialogTitle>
+	<MatDialogContent>
+			<DataAnnotationsValidator />   @* При вызове OnValidSubmit, если нужно посмотреть пробему вызывается эта функция *@
+		@if (ViewModel?.Model !=  null)
+		{
+			<input @bind=" ViewModel.Model.LastName" />
+			<input @bind=" ViewModel.Model.FirstName" />
+			<input @bind=" ViewModel.Model.MiddleName" />
+			<input @bind=" ViewModel.Model.Age" />
+			<input @bind=" ViewModel.Model.SubjectName" />
+		}
+	</MatDialogContent>
+	</EditForm>
+</MatDialog>
+
+@code {
+	[Parameter] public EditTeacherModel ViewModel { get; set; }
+	[Parameter] public EventCallback<TeacherItemViewModel> Save { get; set; }
+}

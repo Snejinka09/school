@@ -1,13 +1,13 @@
 ﻿using school.Db.Models;
 
-namespace school.web.PageModels
+namespace school.web.PageModels.Students
 {
-    public class TeacherItemViewModel
+    public class StudentItemViewModel : ICloneable
     {
-        private TeacherModel _item;
-        public TeacherModel Item => _item;
+        private StudentModel _item;
+        public StudentModel Item => _item;
 
-        public TeacherItemViewModel(TeacherModel item)
+        public StudentItemViewModel(StudentModel item)
         {
             _item = item;
         }
@@ -42,10 +42,19 @@ namespace school.web.PageModels
             set => _item.Age = value;
         }
 
-        public string SubjectName
+        public int ClassId
         {
-            get => _item.SubjectName;
-            set => _item.SubjectName = value;
+            get => _item.ClassId;
+            set => _item.ClassId = value;
+        }
+
+        //public virtual ClassModel Class { get; set; }
+        public object Clone()
+        {
+            StudentItemViewModel tempObject = (StudentItemViewModel)MemberwiseClone();
+            tempObject._item = (StudentModel)_item.Clone();
+            return tempObject;
         }
     }
+
 }

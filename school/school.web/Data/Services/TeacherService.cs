@@ -1,6 +1,6 @@
 ﻿using school.Db;
 using school.Db.Models;
-using school.web.PageModels;
+using school.web.PageModels.Teachers;
 
 namespace school.web.Data.Services
 {
@@ -14,7 +14,7 @@ namespace school.web.Data.Services
 		public List<TeacherItemViewModel> GetTeachers()
 		{
             var list = _context.TeacherDbSet.ToList();
-			return list.ConvertAll(x => new TeacherItemViewModel(x));
+			return list.ConvertAll(x => ConvertItem(x));
         }
 		public void Update(TeacherItemViewModel teacher)
 		{
@@ -26,14 +26,27 @@ namespace school.web.Data.Services
 				item.LastName = teacher.LastName;
 				item.Age = teacher.Age;
 				item.SubjectName = teacher.SubjectName; */
-				var updateItem =
-				_context.UpdateTeacher(teacher.Item);
+				var updateItem = _context.UpdateTeacher(teacher.Item);
 			//}
+		}
+		public void AddTeacher(TeacherItemViewModel teacher)
+		{
+			_context.TeacherDbSet.Add(teacher.Item);
+			_context.SaveChanges();
 		}
 		private TeacherItemViewModel ConvertItem(TeacherModel x)
 		{
 			var item = new TeacherItemViewModel(x);
 			return item;
 		}
+		public void RemoveTeacher(TeacherItemViewModel teacher)
+		{
+            var removeItem = _context.TeacherDbSet.FirstOrDefault(x => x.Id == teacher.Id);
+			if (removeItem != null)
+			{
+				_context.TeacherDbSet.Remove(removeItem);
+                _context.SaveChanges();
+            }
+        }
 	}
 }

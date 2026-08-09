@@ -54,11 +54,32 @@ Where Id = @pId";
                 new SqlParameter("@pLastName", teacher.LastName),
                 new SqlParameter("@pMiddleName", teacher.MiddleName),
                 new SqlParameter("@pAge", teacher.Age),
-                new SqlParameter("@SubjectName", teacher.SubjectName),
+                new SqlParameter("@Position", teacher.SubjectName),
                 new SqlParameter("@pId", teacher.Id)};
             this.Database.ExecuteSqlRaw(sql, list);// отрпавляем запрос в БД с параметрами, после этой строки данные уже обновлены. 
             var sqlSelect = "Select * from Teachers where Id =" + teacher.Id;// возвращаем уже новую запись из БД
             var result = TeacherDbSet.FromSqlRaw(sqlSelect).FirstOrDefault();
+            return result;
+        }
+        public Managment UpdateManagment(Managment managment)
+        {
+            var sql = @"Update Managment
+SET FirstName = @pFirstName,
+LastName = @pLastName,
+MiddleName = @pMiddleName,
+Age = @pAge,
+Position = @Position
+Where Id = @pId";
+            var list = new List<SqlParameter> {
+                new SqlParameter("@pFirstName", managment.FirstName),
+                new SqlParameter("@pLastName", managment.LastName),
+                new SqlParameter("@pMiddleName", managment.MiddleName),
+                new SqlParameter("@pAge", managment.Age),
+                new SqlParameter("@Position", managment.Position),
+                new SqlParameter("@pId", managment.Id)};
+            this.Database.ExecuteSqlRaw(sql, list);// отрпавляем запрос в БД с параметрами, после этой строки данные уже обновлены. 
+            var sqlSelect = "Select * from Managment where Id =" + managment.Id;// возвращаем уже новую запись из БД
+            var result = ManagmentsDbSet.FromSqlRaw(sqlSelect).FirstOrDefault();
             return result;
         }
     }

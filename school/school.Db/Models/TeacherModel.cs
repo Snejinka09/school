@@ -10,7 +10,7 @@ namespace school.Db.Models
 {
     [Table("Teachers")]
 
-    public class TeacherModel
+    public class TeacherModel : ICloneable
     {
         [Key]
 
@@ -25,5 +25,12 @@ namespace school.Db.Models
         public int Age { get; set; }
 
         public string SubjectName { get; set; }
+
+        public object Clone()
+        {
+            TeacherModel tempObject = (TeacherModel)MemberwiseClone();
+            return tempObject;
+        }
     }
+    
 }

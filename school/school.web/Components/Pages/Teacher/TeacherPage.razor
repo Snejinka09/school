@@ -27,21 +27,16 @@
                 <td>@teacher.MiddleName</td>
                 <td>@teacher.Age</td>
                 <td>@teacher.SubjectName</td>
-                <td><i class="btn btn-success bi bi-pencil" @onclick="@(() => SelectTeacher(teacher))"></i>
-                </td>
+                <td><i class="btn btn-success bi bi-pencil" @onclick="@(() => SelectTeacher(teacher))"></i></td>
+                <td><button class="btn btn-secondary bi bi-trash" @onclick="@(() => DeleteTeacher(teacher))"> Удалить учителя</button></td>
             </tr>
         }
     </tbody>
 </table>
-@if (SelectedTeacher != null)
-{
-    <input @bind="SelectedTeacher.FirstName" />
-    <input @bind="SelectedTeacher.LastName" />
-    <input @bind="SelectedTeacher.MiddleName" />
-    <input @bind="SelectedTeacher.Age" />
-    <input @bind="SelectedTeacher.SubjectName" />
-    <button @onclick="Save">Сохранить</button>
-}
+<button class="btn btn-secondary bi bi-plus-lg" @onclick="@(() => AddNewTeacher())"> Добавить учителя</button>
+<EditTeacherDialog ViewModel="EditModel" Save="SaveChanges"></EditTeacherDialog>
+
+
 @code {
 
 }

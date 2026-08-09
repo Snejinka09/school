@@ -1,0 +1,26 @@
+﻿@using school.web.PageModels.Students
+
+
+
+<MatDialog IsOpen="@(ViewModel?.IsOpenDialog ?? false)" CanBeClosed="true">
+	<MatDialogTitle class="diHeader">
+		<h3>Изменение параметров ученика</h3>
+		<button class="btn btn-success" @onclick="@(() => Save.InvokeAsync(ViewModel.Model))">Сохранить</button>
+		<button class="btn btn-secondary" @onclick="@(() => Save.InvokeAsync(null))">Отмена</button>
+	</MatDialogTitle>
+	<MatDialogContent>
+		@if (ViewModel?.Model != null)
+		{
+		<input @bind=" ViewModel.Model.LastName" />
+		<input @bind=" ViewModel.Model.FirstName" />
+		<input @bind=" ViewModel.Model.MiddleName" />
+		<input @bind=" ViewModel.Model.Age" />
+		<input @bind=" ViewModel.Model.ClassId" />
+		}
+	</MatDialogContent>
+</MatDialog>
+
+@code {
+	[Parameter] public EditSudentModel ViewModel { get; set; }
+	[Parameter] public EventCallback<StudentItemViewModel> Save { get; set; }
+}

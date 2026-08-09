@@ -27,21 +27,15 @@
                 <td>@student.MiddleName</td>
                 <td>@student.Age</td>
                 <td>@student.ClassId</td>
-                <td><i class="btn btn-success bi bi-pencil" @onclick="@(() => SelectStudent(student))"></i>
-                </td>
+                <td><i class="btn btn-success bi bi-pencil" @onclick="@(() => SelectStudent(student))"></i></td>
             </tr>
         }
     </tbody>
 </table>
-@if (SelectedStudent != null)
-{
-    <input @bind="SelectedStudent.FirstName"/>
-    <input @bind="SelectedStudent.LastName" />
-    <input @bind="SelectedStudent.MiddleName" />
-    <input @bind="SelectedStudent.Age" />
-    <input @bind="SelectedStudent.ClassId" />
-    <button @onclick="Save">Сохранить</button>
-}
+<button class="btn btn-secondary bi bi-plus-lg" @onclick="@(() => AddNewStudent())"> Добавить ученика</button>
+<EditStudentDialog ViewModel="EditModel" Save="SaveChanges"></EditStudentDialog>
+
+
 @code {
 
 }

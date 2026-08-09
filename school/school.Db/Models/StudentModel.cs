@@ -10,7 +10,7 @@ namespace school.Db.Models
 {
     [Table("Students")] //параметры передаем таблицу "Students"
 
-    public class StudentModel
+    public class StudentModel : ICloneable
     {
         [Key]
 
@@ -25,5 +25,13 @@ namespace school.Db.Models
         public int Age { get; set; }
 
         public int ClassId { get; set; }
+
+        public object Clone() 
+        {
+            StudentModel tempObject = (StudentModel)MemberwiseClone();
+            return tempObject;
+
+        }
+
 	}
 }

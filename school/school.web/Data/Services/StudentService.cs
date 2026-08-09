@@ -1,5 +1,6 @@
 ﻿using school.Db;
 using school.Db.Models;
+using school.web.PageModels.Students;
 
 namespace school.web.Data.Services
 {
@@ -31,7 +32,15 @@ namespace school.web.Data.Services
 				var updateItem = _context.UpdateStudent(student.Item);
 			//}
 		}
-       
+
+
+        public void AddStudent(StudentItemViewModel model)
+        {
+            _context.StudentDbSet.Add(model.Item);
+            _context.SaveChanges();
+        }
+
+
 
         private StudentItemViewModel ConvertItem(StudentModel x)
         {
